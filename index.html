@@ -1,0 +1,550 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>一封送给俊香的信</title>
+    <link type="text/css" rel="stylesheet" href="./renxi/default.css">
+</head>
+<style>
+    *{
+        padding:0;
+        margin:0;
+    }
+    .box {
+        width: 300px;
+        height: 300px;
+        margin: 90px 1560px;
+        position: relative;
+        animation: boom .3s alternate infinite;
+        /*border: 1px solid #000;*/
+    }
+    .left ,.right {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        box-shadow: 0px 0px 30px rgb(255, 192, 205);
+        position: absolute;
+        top: 0;
+    }
+    .left {
+        left: 0;
+        background-color: pink;
+    }
+    .right {
+        right: 0;
+        background-color: pink;
+    }
+    .bottom {
+        width: 180px;
+        height: 180px;
+        background-color: pink;
+        transform: rotate(45deg);
+        box-shadow: 0px 0px 30px rgb(255, 192, 205);
+        position: absolute;
+        top: 60px;
+        left: 60px;
+    }
+
+    @keyframes boom {
+        0%{
+            transform: scale(1);
+        }
+        100% {
+            transform: scale(1.2);
+        }
+    }
+    /*分界线*/
+    body{
+        width:100%;
+        height:100%;
+    }
+    #react{
+        width: 200px;
+        height:200px;
+        margin: -450px 200px;
+        transform-style:preserve-3d;
+        animation:rotate 20s infinite;
+        animation-timing-function: linear;
+    }
+    #react div{
+        position:absolute;
+        transition: all .4s;
+    }
+    div .out_pic{
+        width:200px;
+        height:200px;
+        opacity:0.9;
+    }
+    div .in_pic{
+        width:100px;
+        height:100px;
+    }
+    #react span{
+        display:block;
+        position:absolute;
+        width:100px;
+        height:100px;
+        top:50px;
+        left:50px;
+    }
+    @keyframes rotate{
+        from{transform: rotateX(0deg) rotateY(0deg);}
+        to{transform: rotateX(360deg) rotateY(360deg);}
+    }
+    .out_frount{
+        transform:translateZ(100px);
+    }
+    .out_back{
+        transform:translateZ(-100px);
+    }
+    .out_left{
+        transform:rotateY(90deg) translateZ(100px);
+    }
+    .out_right{
+        transform: rotateY(-90deg) translateZ(100px);
+    }
+    .out_top{
+        transform:rotateX(90deg) translateZ(100px);
+    }
+    .out_bottom{
+        transform: rotateX(-90deg) translateZ(100px);
+    }
+    .in_frount{
+        transform:translateZ(50px);
+    }
+    .in_back{
+        transform:translateZ(-50px);
+    }
+    .in_left{
+        transform:rotateY(90deg) translateZ(50px);
+    }
+    .in_right{
+        transform: rotateY(-90deg) translateZ(50px);
+    }
+    .in_top{
+        transform:rotateX(90deg) translateZ(50px);
+    }
+    .in_bottom{
+        transform: rotateX(-90deg) translateZ(50px);
+    }
+    #react:hover .out_frount{
+        transform:translateZ(200px);
+    }
+    #react:hover .out_back{
+        transform:translateZ(-200px);
+    }
+    #react:hover .out_left{
+        transform:rotateY(90deg) translateZ(200px);
+    }
+    #react:hover .out_right{
+        transform: rotateY(-90deg) translateZ(200px);
+    }
+    #react:hover .out_top{
+        transform:rotateX(90deg) translateZ(200px);
+    }
+    #react:hover .out_bottom{
+        transform: rotateX(-90deg) translateZ(200px);
+    }
+</style>
+<body>
+<div class="mask"></div>
+<div id="gallery" class="fullscreen"></div>
+<audio src="tmm.m4a" autoplay id="audio"></audio>
+<div id="main">
+    <div id="wrap">
+        <div id="text">
+            <div id="code">尊敬的皮皮香：<br><br>多少次和今天一样的夜晚,我透过黑色的天空追忆着你,那分明不在的事实显得如此美丽,似乎万物没有了生命,异常冰冷,此刻能感到温度和生命的,只有我唯一的心;你总是默默无语,我只能从你甜蜜的微笑中感受你的声音,我时时注意着你,我不愿错过一丝机会,心儿徘徊在夜阑人静时,我幻觉着你甜蜜的声音把我唤醒,你总是默默无语,用你娇媚的手势为我分担悲痛和忧郁,你的秀发被风牵引着.;你的衣裙被风轻拂着,飘飘曳曳,你却轻轻抹平我在海边留下的脚印.每当我思绪清醒,我只觉得自己是守船的梢公,在晚风中等待着你.<span class="space">辉辉</span></div>
+        </div>
+        <div class="btn">来看看我呀</div>
+        <div id="clock-box">
+            <div id="clock"></div>
+        </div>
+        <canvas id="canvas" width="1100" height="700"></canvas>
+    </div>
+
+</div>
+
+<script type="text/javascript" src="./renxi/jquery.min.js"></script>
+<script type="text/javascript" src="./renxi/jscex.min.js"></script>
+<script type="text/javascript" src="./renxi/jscex-parser.js"></script>
+<script type="text/javascript" src="./renxi/jscex-jit.js"></script>
+<script type="text/javascript" src="./renxi/jscex-builderbase.min.js"></script>
+<script type="text/javascript" src="./renxi/jscex-async.min.js"></script>
+<script type="text/javascript" src="./renxi/jscex-async-powerpack.min.js"></script>
+<script type="text/javascript" src="./renxi/functions.js" charset="utf-8"></script>
+<script type="text/javascript" src="./renxi/love.js" charset="utf-8"></script>
+
+<script>
+
+    (function () {
+        var polaroidGallery = (function () {
+            var dataSize = {};
+            var dataLength = 0;
+            var currentItem = null;
+            var navbarHeight = 60;
+            var resizeTimeout = null;
+            var xmlhttp = new XMLHttpRequest();
+            var url = "data/data.json";
+
+            function polaroidGallery() {
+                observe();
+                xmlhttp.onreadystatechange = function () {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        var myArr = JSON.parse(xmlhttp.responseText);
+                        setGallery(myArr);
+                        init();
+                    }
+                };
+                xmlhttp.open("GET", url, true);
+                xmlhttp.send();
+            }
+            function setGallery(arr) {
+                var out = "";
+                var i;
+                for (i = 0; i < arr.length; i++) {
+                    out += '<figure id="' + i + '">' +
+                        '<img src="img/' + arr[i].name + '" alt="' + arr[i].name + '"/>' +
+                        '<figcaption>' + arr[i].caption + '</figcaption>' +
+                        '</figure>';
+                }
+                document.getElementById("gallery").innerHTML = out;
+            }
+            function observe() {
+                var observeDOM = (function () {
+                    var MutationObserver = window.MutationObserver || window.WebKitMutationObserver,
+                        eventListenerSupported = window.addEventListener;
+                    return function (obj, callback) {
+                        if (MutationObserver) {
+                            var obs = new MutationObserver(function (mutations, observer) {
+                                if( mutations[0].addedNodes.length || mutations[0].removedNodes.length )
+                                    callback(mutations);
+                            });
+                            obs.observe(obj, { childList: true, subtree: false });
+                        }
+                        else if (eventListenerSupported) {
+                            obj.addEventListener('DOMNodeInserted', callback, false);
+                        }
+                    }
+                })();
+                observeDOM(document.getElementById('gallery'), function (mutations) {
+                    var gallery = [].slice.call(mutations[0].addedNodes);
+                    var zIndex = 1;
+                    gallery.forEach(function (item) {
+                        var img = item.getElementsByTagName('img')[0];
+                        var first = true;
+                        img.addEventListener('load', function () {
+                            if (first) {
+                                currentItem = item;
+                                first = false;
+                            }
+                            dataSize[item.id] = {item: item, width: item.offsetWidth, height: item.offsetHeight};
+                            dataLength++;
+                            item.addEventListener('click', function () {
+                                select(item);
+                                shuffleAll();
+                            });
+                            shuffle(item, zIndex++);
+                        })
+                    });
+                });
+            }
+
+            function init() {
+                navbarHeight = document.getElementById("nav").offsetHeight;
+                navigation();
+
+                window.addEventListener('resize', function () {
+                    if (resizeTimeout) {
+                        clearTimeout(resizeTimeout);
+                    }
+                    resizeTimeout = setTimeout(function () {
+                        shuffleAll();
+                        if (currentItem) {
+                            select(currentItem);
+                        }
+                    }, 100);
+                });
+            }
+            function select(item) {
+                var scale = 1.8;
+                var rotRandomD = 0;
+                var initWidth = dataSize[item.id].width;
+                var initHeight = dataSize[item.id].height;
+                var newWidth = (initWidth * scale);
+                var newHeight = initHeight * (newWidth / initWidth);
+                var x = (window.innerWidth - newWidth) / 2;
+                var y = (window.innerHeight - navbarHeight - newHeight) / 2;
+                item.style.transformOrigin = '0 0';
+                item.style.WebkitTransform = 'translate(' + x + 'px,' + y + 'px) rotate(' + rotRandomD + 'deg) scale(' + scale + ',' + scale + ')';
+                item.style.msTransform = 'translate(' + x + 'px,' + y + 'px) rotate(' + rotRandomD + 'deg) scale(' + scale + ',' + scale + ')';
+                item.style.transform = 'translate(' + x + 'px,' + y + 'px) rotate(' + rotRandomD + 'deg) scale(' + scale + ',' + scale + ')';
+                item.style.zIndex = 999;
+                currentItem = item;
+            }
+            function shuffle(item, zIndex) {
+                var randomX = Math.random();
+                var randomY = Math.random();
+                var maxR = 45;
+                var minR = -45;
+                var rotRandomD = Math.random() * (maxR - minR) + minR;
+                var rotRandomR = rotRandomD * Math.PI / 180;
+                var rotatedW = Math.abs(item.offsetWidth * Math.cos(rotRandomR)) + Math.abs(item.offsetHeight * Math.sin(rotRandomR));
+                var rotatedH = Math.abs(item.offsetWidth * Math.sin(rotRandomR)) + Math.abs(item.offsetHeight * Math.cos(rotRandomR));
+                var x = Math.floor((window.innerWidth - rotatedW) * randomX);
+                var y = Math.floor((window.innerHeight - rotatedH) * randomY);
+                item.style.transformOrigin = '0 0';
+                item.style.WebkitTransform = 'translate(' + x + 'px,' + y + 'px) rotate(' + rotRandomD + 'deg) scale(1)';
+                item.style.msTransform = 'translate(' + x + 'px,' + y + 'px) rotate(' + rotRandomD + 'deg) scale(1)';
+                item.style.transform = 'translate(' + x + 'px,' + y + 'px) rotate(' + rotRandomD + 'deg) scale(1)';
+                item.style.zIndex = zIndex;
+            }
+            function shuffleAll() {
+                var zIndex = 0;
+                for (var id in dataSize) {
+                    if (id != currentItem.id) {
+                        shuffle(dataSize[id].item, zIndex++);
+                    }
+                }
+            }
+
+            function navigation() {
+                var next = document.getElementById('next');
+                var preview = document.getElementById('preview');
+
+                next.addEventListener('click', function () {
+                    var currentIndex = Number(currentItem.id) + 1;
+                    if (currentIndex >= dataLength) {
+                        currentIndex = 0
+                    }
+                    select(dataSize[currentIndex].item);
+                    shuffleAll();
+                });
+
+                preview.addEventListener('click', function () {
+                    var currentIndex = Number(currentItem.id) - 1;
+                    if (currentIndex < 0) {
+                        currentIndex = dataLength - 1
+                    }
+                    select(dataSize[currentIndex].item);
+                    shuffleAll();
+                })
+            }
+
+            return polaroidGallery;
+        })();
+
+        $('.btn').on('click',function () {
+            $('.mask').fadeIn(300);
+            $('.fullscreen').show();
+            new polaroidGallery("data/data.json");
+
+        });
+
+        var canvas = $('#canvas');
+
+
+
+        if (!canvas[0].getContext) {
+            $("#error").show();
+            return false;
+        }
+
+        var width = canvas.width();
+        var height = canvas.height();
+
+        canvas.attr("width", width);
+        canvas.attr("height", height);
+
+        var opts = {
+            seed: {
+                x: width / 2 - 20,
+                color: "rgb(190, 26, 37)",
+                scale: 2
+            },
+            branch: [
+                [535, 680, 570, 250, 500, 200, 30, 100, [
+                    [540, 500, 455, 417, 340, 400, 13, 100, [
+                        [450, 435, 434, 430, 394, 395, 2, 40]
+                    ]],
+                    [550, 445, 600, 356, 680, 345, 12, 100, [
+                        [578, 400, 648, 409, 661, 426, 3, 80]
+                    ]],
+                    [539, 281, 537, 248, 534, 217, 3, 40],
+                    [546, 397, 413, 247, 328, 244, 9, 80, [
+                        [427, 286, 383, 253, 371, 205, 2, 40],
+                        [498, 345, 435, 315, 395, 330, 4, 60]
+                    ]],
+                    [546, 357, 608, 252, 678, 221, 6, 100, [
+                        [590, 293, 646, 277, 648, 271, 2, 80]
+                    ]]
+                ]]
+            ],
+            bloom: {
+                num: 700,
+                width: 1080,
+                height: 650
+            },
+            footer: {
+                width: 1200,
+                height: 5,
+                speed: 10
+            }
+        };
+
+        var tree = new Tree(canvas[0], width, height, opts);
+        var seed = tree.seed;
+        var foot = tree.footer;
+        var hold = 1;
+
+        canvas.click(function (e) {
+            var au = document.querySelector('#audio');
+            au.play();
+            var offset = canvas.offset(), x, y;
+            x = e.pageX - offset.left;
+            y = e.pageY - offset.top;
+            if (seed.hover(x, y)) {
+                hold = 0;
+                canvas.unbind("click");
+                canvas.unbind("mousemove");
+                canvas.removeClass('hand');
+            }
+        }).mousemove(function (e) {
+            var offset = canvas.offset(), x, y;
+            x = e.pageX - offset.left;
+            y = e.pageY - offset.top;
+            canvas.toggleClass('hand', seed.hover(x, y));
+        });
+
+        var seedAnimate = eval(Jscex.compile("async", function () {
+            seed.draw();
+            while (hold) {
+                $await(Jscex.Async.sleep(10));
+            }
+            while (seed.canScale()) {
+                seed.scale(0.95);
+                $await(Jscex.Async.sleep(10));
+            }
+            while (seed.canMove()) {
+                seed.move(0, 2);
+                foot.draw();
+                $await(Jscex.Async.sleep(10));
+            }
+        }));
+
+        var growAnimate = eval(Jscex.compile("async", function () {
+            do {
+                tree.grow();
+                $await(Jscex.Async.sleep(10));
+            } while (tree.canGrow());
+        }));
+
+        var flowAnimate = eval(Jscex.compile("async", function () {
+            do {
+                tree.flower(2);
+                $await(Jscex.Async.sleep(10));
+            } while (tree.canFlower());
+        }));
+
+        var moveAnimate = eval(Jscex.compile("async", function () {
+            tree.snapshot("p1", 240, 0, 610, 680);
+            while (tree.move("p1", 500, 0)) {
+                foot.draw();
+                $await(Jscex.Async.sleep(10));
+            }
+            foot.draw();
+            tree.snapshot("p2", 500, 0, 610, 680);
+
+            // 会有闪烁不得意这样做, (＞﹏＜)
+            canvas.parent().css("background", "url(" + tree.toDataURL('image/png') + ")");
+            canvas.css("background", "#ffe");
+            $await(Jscex.Async.sleep(300));
+            canvas.css("background", "none");
+        }));
+
+        var jumpAnimate = eval(Jscex.compile("async", function () {
+            var ctx = tree.ctx;
+            while (true) {
+                tree.ctx.clearRect(0, 0, width, height);
+                tree.jump();
+                foot.draw();
+                $await(Jscex.Async.sleep(25));
+            }
+        }));
+
+        var textAnimate = eval(Jscex.compile("async", function () {
+            var together = new Date();
+            together.setFullYear(2017, 10, 28); 			//时间年月日
+            together.setHours(12);						//小时
+            together.setMinutes(53);					//分钟
+            together.setSeconds(0);					//秒前一位
+            together.setMilliseconds(2);				//秒第二位
+
+            $("#code").show().typewriter();
+
+            $("#clock-box").fadeIn(500);
+            while (true) {
+                timeElapse(together);
+                $await(Jscex.Async.sleep(1000));
+            }
+        }));
+
+        var runAsync = eval(Jscex.compile("async", function () {
+            $await(seedAnimate());
+            $await(growAnimate());
+            $await(flowAnimate());
+            $await(moveAnimate());
+
+            textAnimate().start();
+
+            $await(jumpAnimate());
+        }));
+
+        runAsync().start();
+    })();
+</script>
+<embed src="tmm.m4a" hidden="true" autostart="true" loop="true">
+<div id="react">
+    <div class="out_frount">
+        <img src="iimg/1.jpg" class="out_pic">
+    </div>
+    <div class="out_back">
+        <img src="iimg/2.jpg" class="out_pic">
+    </div>
+    <div class="out_left">
+        <img src="iimg/3.jpg" class="out_pic">
+    </div>
+    <div class="out_right">
+        <img src="iimg/4.jpg" class="out_pic">
+    </div>
+    <div class="out_top">
+        <img src="iimg/5.jpg" class="out_pic">
+    </div>
+    <div class="out_bottom">
+        <img src="iimg/6.jpg" class="out_pic">
+    </div>
+    <span class="in_frount">
+        <img src="iimg/7.jpg" class="in_pic">
+    </span>
+    <span class="in_back">
+        <img src="iimg/8.jpg" class="in_pic">
+    </span>
+    <span class="in_left">
+        <img src="iimg/9.jpg" class="in_pic">
+    </span>
+    <span class="in_right">
+        <img src="iimg/10.jpg" class="in_pic">
+    </span>
+    <span class="in_top">
+        <img src="iimg/11.jpg" class="in_pic">
+    </span>
+    <span class="in_bottom">
+        <img src="iimg/12.jpg" class="in_pic">
+    </span>
+</div>
+<div class="box">
+    <div class="left"></div>
+    <div class="right"></div>
+    <div class="bottom"></div>
+</div>
+</body>
+</html>
